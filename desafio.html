@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo do Labirinto</title>
+    <style>
+        body {
+            background-color: rgb(17, 17, 17);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: aliceblue;
+        }
+        canvas {
+            border: 2px solid black;
+            display: block;
+            margin: auto;
+        }
+        #convite {
+            display: none;
+            color: white;
+            font-size: 2em;
+            background-color: red;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        /* Estilo dos botões de direção */
+        .controls {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Encontre a saída do labirinto!</h1>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <div id="convite">
+        <p>Parabéns! Você venceu! <a href="convite.html" style="color: white; text-decoration: none;">Clique aqui para ver seu convite</a></p>
+    </div>
+    
+    <!-- Botões de controle -->
+    <div class="controls">
+        <button onclick="movePlayer(0, -1)">↑</button><br>
+        <button onclick="movePlayer(-1, 0)">←</button>
+        <button onclick="movePlayer(1, 0)">→</button><br>
+        <button onclick="movePlayer(0, 1)">↓</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        
+        const maze = [
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,0,0,0,1,0,0,0,0,1],
+            [1,0,1,0,1,0,1,1,0,1],
+            [1,0,1,0,0,0,0,1,0,1],
+            [1,0,1,1,1,1,0,1,0,1],
+            [1,0,0,0,0,0,0,1,0,1],
+            [1,1,1,1,1,1,1,1,0,1],
+            [1,0,0,0,0,0,0,0,0,1],
+            [1,0,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1]
+        ];
+        
+        let player = { x: 1, y: 1 };
+        let exit = { x: 8, y: 7 };
+        
+        function drawMaze() {
+            for (let y = 0; y < maze.length; y++) {
+                for (let x = 0; x < maze[y].length; x++) {
+                    ctx.fillStyle = maze[y][x] === 1 ? "black" : "white";
+                    ctx.fillRect(x * 40, y * 40, 40, 40);
+                }
+            }
+            ctx.fillStyle = "blue";
+            ctx.fillRect(player.x * 40, player.y * 40, 40, 40);
+            ctx.fillStyle = "red";
+            ctx.fillRect(exit.x * 40, exit.y * 40, 40, 40);
+        }
+        
+        function movePlayer(dx, dy) {
+            let newX = player.x + dx;
+            let newY = player.y + dy;
+            if (maze[newY][newX] === 0) {
+                player.x = newX;
+                player.y = newY;
+                drawMaze();
+                if (player.x === exit.x && player.y === exit.y) {
+                    // Exibe o convite
+                    document.getElementById("convite").style.display = "block";
+                    alert("Parabéns! Você encontrou a saída!");
+                    // Redireciona imediatamente após o alerta
+                    window.location.href = "convite.html";
+                }
+            }
+        }
+        
+        drawMaze();
+    </script>
+</body>
+</html>
+
+

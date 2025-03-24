@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite</title>
+    <style>
+        body {
+            background-color: #800000; /* Cor de fundo vinho */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            position: relative;
+            width: 80%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px; /* Adiciona espaço nas bordas */
+            box-sizing: border-box;
+        }
+        .convite-img {
+            max-width: 90%;
+            max-height: 70%;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards; /* Animação de fade-in */
+            margin-bottom: 20px; /* Espaço entre a imagem e o botão */
+        }
+        .download-btn {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #3a0000; /* Cor do botão */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block; /* Garante que o botão se comporte como um bloco */
+        }
+        .download-btn:hover {
+            background-color: #a40000;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="./Gold and Black Elegant Birthday Party Invitation.png" alt="Convite" class="convite-img" id="conviteImg"> <!-- Substitua "convite-imagem.jpg" pela sua imagem do convite -->
+        <a href="./Gold and Black Elegant Birthday Party Invitation.png" download="Convite_Jogo_Labirinto.jpg" class="download-btn">Baixar Convite</a>
+    </div>
+
+    <script>
+        // Certifique-se de que a imagem do convite seja carregada com o efeito de entrada
+        window.onload = () => {
+            const conviteImg = document.getElementById("conviteImg");
+            conviteImg.style.animation = "fadeIn 1.5s forwards"; // Aplica o efeito de fade-in quando a página for carregada
+        };
+    </script>
+</body>
+</html>
